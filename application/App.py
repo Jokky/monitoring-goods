@@ -5,6 +5,7 @@ from domain.GoodStore import GoodStore
 from domain.Price import Price
 from domain.Store import Store
 from service.CompareGoodsPrice import CompareGoodsPrice
+from utils.ConfigService import ConfigService
 
 
 class App:
@@ -12,6 +13,8 @@ class App:
         self.compareGoodsPrice = CompareGoodsPrice()
 
     def run(self):
+        print(ConfigService.get('PERCENT_DOWN_GOOD'))
+
         eldorrado = Store('Eldorado')
         mvideo = Store('MVideo')
         dns = Store('DNS')
