@@ -1,7 +1,5 @@
 from domain.Good import Good
 
-import os
-
 
 class CompareGoodsPrice:
     def __init__(self):
