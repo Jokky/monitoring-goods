@@ -1,15 +1,16 @@
 from domain.Good import Good
+from utils.Observable import Subject, Observer
 
 
-class CompareGoodsPrice:
+class DifferentPercentGoodsPrice(Observer[Good]):
     def __init__(self):
         pass
 
-    def exec(self, good: Good) -> float:
-        minPriceGood = next(good.goodStore.__iter__())
+    def update(self, subject: Good) -> None:
+        minPriceGood = subject.goodStores[0]
         maxPriceGood = minPriceGood
 
-        for goodStore in good.goodStore:
+        for goodStore in subject.goodStores:
             if minPriceGood.price.amount > goodStore.price.amount:
                 minPriceGood = goodStore
 
@@ -18,4 +19,4 @@ class CompareGoodsPrice:
 
         differencePriceGoods = maxPriceGood.price.amount - minPriceGood.price.amount
 
-        return (differencePriceGoods / minPriceGood.price.amount) * 100
+        print((differencePriceGoods / minPriceGood.price.amount) * 100)
