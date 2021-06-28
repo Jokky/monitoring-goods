@@ -1,42 +1,25 @@
-from domain.Category import Category
-from domain.CategoryStore import CategoryStore
-from domain.Good import Good
-from domain.GoodStore import GoodStore
 from domain.Price import Price
-from domain.Store import Store
+from service.CategoryService import CategoryService
 from service.DifferentPercentGoodsPrice import DifferentPercentGoodsPrice
-from utils.ConfigService import ConfigService
+from service.GoodService import GoodService
+from service.StoreService import StoreService
 
 
 class App:
     def __init__(self):
-        pass
+        self.differentPercentGoodsPrice = DifferentPercentGoodsPrice()
+        self.store_service = StoreService()
+        self.good_service = GoodService(self.store_service, self.differentPercentGoodsPrice)
+        self.category_service = CategoryService(self.store_service, self.good_service)
 
     def run(self):
-        # print(ConfigService.get('PERCENT_DOWN_GOOD'))
-
-        eldorrado = Store('Eldorado')
-        mvideo = Store('MVideo')
-        dns = Store('DNS')
-
-        eldorradoIPhone = GoodStore('iphone 11 pro max 256GB', Price(90000), eldorrado)
-        mvideoIPhone = GoodStore('iphone 11 pro max white 256GB', Price(81000), mvideo)
-        dnsIPhone = GoodStore('iphone 11 pro max black 256GB', Price(79000), dns)
-
-        differentPercentGoodsPrice = DifferentPercentGoodsPrice()
-
-        iphone = Good([eldorradoIPhone, mvideoIPhone])
-        iphone.attach(differentPercentGoodsPrice)
-
-        categoryPhoneEldorado = CategoryStore(eldorrado, 'Смарфоны', [eldorradoIPhone])
-        categoryPhoneMvideo = CategoryStore(mvideo, 'Смартфоны Apple', [mvideoIPhone])
-
-        categoryPhone = Category([categoryPhoneEldorado, categoryPhoneMvideo], 'Смарфтоны', [iphone])
-
         print("Name\tPrice")
-        for cat in categoryPhone.categoryStore:
+        for cat in self.category_service.get_categories():
             for good in cat.goods:
-                print("{}\t{}".format(good.name, good.price.amount))
+                for good_store in good.good_stores:
+                    print("{}\t{}".format(good_store.name, good_store.price.amount))
 
-        iphone.update_good_store(dnsIPhone)
-        # print("Percent goods compare by price: {}".format())
+        good = self.good_service.get_good_by_id(1)
+        good.good_stores[0].name = "sadasdas"
+        good.good_stores[0].price = Price(30000)
+        self.good_service.update_good_store(1, good.good_stores[0])

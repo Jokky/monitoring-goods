@@ -14,9 +14,6 @@ class Good(Subject):
     def notify(self) -> None:
         super().notify()
 
-    def __init__(self, goodStores: List[GoodStore]):
-        self.goodStores = goodStores
-
-    def update_good_store(self, goodStore: GoodStore):
-        self.goodStores.append(goodStore)
-        super().notify()
+    def __init__(self, id: int, good_stores: List[GoodStore]):
+        self.id = id
+        self.good_stores = good_stores

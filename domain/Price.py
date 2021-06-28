@@ -4,6 +4,6 @@ class Currency:
 
 
 class Price:
-    def __init__(self, amount: int):
+    def __init__(self, amount: int, currency: Currency = Currency.RUB):
         self.amount = amount
-        self.currency = Currency.RUB
+        self.currency = currency

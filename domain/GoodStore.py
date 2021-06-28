@@ -3,7 +3,8 @@ from domain.Store import Store
 
 
 class GoodStore:
-    def __init__(self, name: str, price: Price, store: Store):
+    def __init__(self, id: int, name: str, price: Price, store: Store):
+        self.id = id
         self.name = name
         self.price = price
         self.store = store

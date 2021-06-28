@@ -1,5 +1,5 @@
 from domain.Good import Good
-from utils.Observable import Subject, Observer
+from utils.Observable import Observer
 
 
 class DifferentPercentGoodsPrice(Observer[Good]):
@@ -7,10 +7,10 @@ class DifferentPercentGoodsPrice(Observer[Good]):
         pass
 
     def update(self, subject: Good) -> None:
-        minPriceGood = subject.goodStores[0]
+        minPriceGood = subject.good_stores[0]
         maxPriceGood = minPriceGood
 
-        for goodStore in subject.goodStores:
+        for goodStore in subject.good_stores:
             if minPriceGood.price.amount > goodStore.price.amount:
                 minPriceGood = goodStore
 
