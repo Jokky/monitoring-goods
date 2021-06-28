@@ -57,15 +57,11 @@ class GoodService:
         goods: List[Good] = []
         for good in self.__goods:
             if good.id == good_id:
-                counter = 0
                 for f_good_store in good.good_stores:
-                    counter += 1
                     if f_good_store.id == good_store.id:
                         f_good_store.price = good_store.price
                         f_good_store.name = good_store.name
-                        counter -= 1
-                if counter < len(good.good_stores):
-                    good.notify()
+                good.notify()
             goods.append(good)
 
         self.__goods = goods
