@@ -1,4 +1,7 @@
 from domain.Price import Price
+from repository.GoodRepository import GoodRepository
+from repository.GoodStoreRepository import GoodStoreRepository
+from repository.StoreRepository import StoreRepository
 from service.CategoryService import CategoryService
 from service.DifferentPercentGoodsPrice import DifferentPercentGoodsPrice
 from service.GoodService import GoodService
@@ -8,8 +11,13 @@ from service.StoreService import StoreService
 class App:
     def __init__(self):
         self.differentPercentGoodsPrice = DifferentPercentGoodsPrice()
+
+        self.store_repository = StoreRepository()
+        self.good_store_repository = GoodStoreRepository(self.store_repository)
+        self.good_repository = GoodRepository(self.good_store_repository)
+
         self.store_service = StoreService()
-        self.good_service = GoodService(self.store_service, self.differentPercentGoodsPrice)
+        self.good_service = GoodService(self.good_repository, self.good_store_repository)
         self.category_service = CategoryService(self.store_service, self.good_service)
 
     def run(self):

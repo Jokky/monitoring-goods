@@ -5,6 +5,13 @@ from utils.Observable import Subject, Observer
 
 
 class Good(Subject):
+    id: int = 0
+    good_stores: List[GoodStore] = []
+
+    def __init__(self, id: int, good_stores: List[GoodStore]):
+        self.id = id
+        self.good_stores = good_stores
+
     def attach(self, observer: Observer) -> None:
         super().attach(observer)
 
@@ -13,7 +20,3 @@ class Good(Subject):
 
     def notify(self) -> None:
         super().notify()
-
-    def __init__(self, id: int, good_stores: List[GoodStore]):
-        self.id = id
-        self.good_stores = good_stores
