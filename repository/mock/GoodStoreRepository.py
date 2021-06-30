@@ -4,7 +4,7 @@ from domain.GoodStore import GoodStore
 from domain.Price import Price
 from domain.Store import Store
 from repository.Repository import Repository, T
-from service.DifferentPercentGoodStoresPrice import DifferentPercentGoodStoresPrice
+from observer.DifferentPercentGoodStoresPrice import DifferentPercentGoodStoresPrice
 
 
 class GoodStoreRepository(Repository[GoodStore]):

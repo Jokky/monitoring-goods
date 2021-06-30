@@ -13,5 +13,5 @@ class DifferentPercentGoodStoresPrice(Observer[GoodStore]):
 
         percentPrice = (prevPrice.amount / actualPrice.amount) * 100
 
-        if ConfigService.get('PERCENT_DOWN_GOOD_STORES', int) < percentPrice:
+        if ConfigService.get('PERCENT_DOWN_GOOD_STORES') < percentPrice:
             print(f'{subject.name} has been changed by {percentPrice}%')

@@ -3,7 +3,7 @@ from typing import List, Optional
 from domain.Good import Good
 from domain.GoodStore import GoodStore
 from repository.Repository import Repository, T
-from service.DifferentPercentGoodsPrice import DifferentPercentGoodsPrice
+from observer.DifferentPercentGoodsPrice import DifferentPercentGoodsPrice
 
 
 class GoodRepository(Repository[Good]):
