@@ -9,6 +9,7 @@ class Good(Subject):
     good_stores: List[GoodStore] = []
 
     def __init__(self, id: int, good_stores: List[GoodStore]):
+        super().__init__()
         self.id = id
         self.good_stores = good_stores
 

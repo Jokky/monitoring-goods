@@ -4,6 +4,7 @@ from domain.GoodStore import GoodStore
 from domain.Price import Price
 from domain.Store import Store
 from repository.Repository import Repository, T
+from service.DifferentPercentGoodStoresPrice import DifferentPercentGoodStoresPrice
 
 
 class GoodStoreRepository(Repository[GoodStore]):
@@ -11,10 +12,21 @@ class GoodStoreRepository(Repository[GoodStore]):
 
     def __init__(self, store_repository: Repository[Store]):
         super().__init__()
+
+        differentPercentGoodStoresPrice = DifferentPercentGoodStoresPrice()
+
+        good1 = GoodStore(1, 'iphone 11 pro max 256GB', Price(90000), store_repository.find(1))
+        good2 = GoodStore(2, 'iphone 11 pro max white 256GB', Price(81000), store_repository.find(2))
+        good3 = GoodStore(3, 'iphone 11 pro max black 256GB', Price(79000), store_repository.find(3))
+
+        good1.attach(differentPercentGoodStoresPrice)
+        good2.attach(differentPercentGoodStoresPrice)
+        good3.attach(differentPercentGoodStoresPrice)
+
         self.__good_stores = [
-            GoodStore(1, 'iphone 11 pro max 256GB', Price(90000), store_repository.find(1)),
-            GoodStore(2, 'iphone 11 pro max white 256GB', Price(81000), store_repository.find(2)),
-            GoodStore(3, 'iphone 11 pro max black 256GB', Price(79000), store_repository.find(3))
+            good1,
+            good2,
+            good3
         ]
 
     def find_all(self) -> List[T]:

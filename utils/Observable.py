@@ -14,14 +14,17 @@ class Observer(Generic[T]):
 
 
 class Subject(ABC):
-    _observers: List[T] = []
+    _observers: List[Observer] = []
+
+    def __init__(self):
+        self._observers = []
 
     @abstractmethod
-    def attach(self, observer: T) -> None:
+    def attach(self, observer: Observer) -> None:
         self._observers.append(observer)
 
     @abstractmethod
-    def detach(self, observer: T) -> None:
+    def detach(self, observer: Observer) -> None:
         self._observers.remove(observer)
 
     @abstractmethod

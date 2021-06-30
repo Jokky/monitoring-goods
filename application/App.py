@@ -25,9 +25,13 @@ class App:
         for cat in self.category_service.get_categories():
             for good in cat.goods:
                 for good_store in good.good_stores:
-                    print("{}\t{}".format(good_store.name, good_store.price.amount))
+                    print(f'{good_store.name}\t{good_store.price.amount}')
 
         good = self.good_service.get_good_by_id(1)
         good.good_stores[0].name = "sadasdas"
         good.good_stores[0].price = Price(30000)
         self.good_service.update_good_store(1, good.good_stores[0])
+
+        # for i in range(0, 10000):
+        #     good.good_stores[0].price = Price(good.good_stores[0].price.amount - i)
+        #     self.good_service.update_good_store(1, good.good_stores[0])

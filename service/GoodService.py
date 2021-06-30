@@ -46,7 +46,7 @@ class GoodService:
         #     good_store,
         #     *good.good_stores[positionGoodStore + 1:len(good.good_stores)],
         # ]
-
+        good_store.notify()
         good.notify()
 
         return True

@@ -1,8 +1,6 @@
 from abc import abstractmethod
 from typing import TypeVar, Generic, List, Type, Optional
 
-from domain.Good import Good
-
 T = TypeVar('T')
 
 
