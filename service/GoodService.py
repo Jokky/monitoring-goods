@@ -1,3 +1,4 @@
+import asyncio
 from typing import List, Optional
 
 from domain.Good import Good
